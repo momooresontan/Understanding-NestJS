@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
@@ -20,6 +20,7 @@ export class UsersController {
     return this.usersService.findById(Number(id));
   }
 
+  @ApiCreatedResponse({ type: User })
   @Post()
   createUser(@Body() body: CreateUserDto): User {
     return this.usersService.createUser(body);
